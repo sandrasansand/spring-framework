@@ -1,0 +1,47 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- referenciamos a factura rel 1:1 -->
+	<bean id="juanan" class="com.arquitectura.java.Persona">
+		<property name="nombre" value="juanan" />
+		<property name="factura" ref="factura1" />
+	</bean>
+
+	<!-- esto configura la factoria de Spring para construir un objeto factura1 
+		que pertenezca a la clase FacturaConIVA y mediante property name="lineas" 
+		ref bean="linea1" establecemos la relacion entre facturaConIva y lineaFactura -->
+	<bean id="factura1" class="com.arquitectura.java.FacturaConIVA">
+		<property name="numero" value="1"></property>
+		<property name="concepto" value="ordenador"></property>
+		<property name="importe" value="1300"></property>
+
+		<property name="lineas">
+			<list>
+				<ref bean="linea1" />
+				<ref bean="linea2" />
+
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="linea1" class="com.arquitectura.java.LineaFactura">
+		<property name="numero" value="1"></property>
+		<property name="concepto" value="tablet"></property>
+		<property name="importe" value="800"></property>
+	</bean>
+
+	<bean id="linea2" class="com.arquitectura.java.LineaFactura">
+		<property name="numero" value="2"></property>
+		<property name="concepto" value="movil"></property>
+		<property name="importe" value="500"></property>
+	</bean>
+
+
+
+
+</beans>
